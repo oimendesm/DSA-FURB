@@ -1,6 +1,8 @@
 package ListaEstatica;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -79,4 +81,46 @@ public class PlanoDeTestes {
 
         assertEquals("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", listaTeste.toString());
     }
+
+    @Test
+    public void caso7(){
+        ListaEstatica listaTeste = new ListaEstatica();
+        
+        listaTeste.inserir(5);
+        listaTeste.inserir(10);
+        listaTeste.inserir(15);
+        listaTeste.inserir(20);
+
+        assertEquals(20, listaTeste.obterElemento(3));
+    }
+
+    @Test
+    public void caso8(){
+        ListaEstatica listaTeste = new ListaEstatica();
+        
+        listaTeste.inserir(5);
+        listaTeste.inserir(10);
+        listaTeste.inserir(15);
+        listaTeste.inserir(20);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            listaTeste.obterElemento(5); 
+        });
+    }
+
+    @Test
+    public void caso9(){
+        ListaEstatica listaTeste = new ListaEstatica();
+        
+        listaTeste.inserir(5);
+        listaTeste.inserir(10);
+        listaTeste.inserir(15);
+        listaTeste.inserir(20);
+
+        listaTeste.liberar();
+
+        assertTrue(listaTeste.estaVazia());
+    }
+
+
 }
