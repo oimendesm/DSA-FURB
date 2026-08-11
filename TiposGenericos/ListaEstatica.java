@@ -1,17 +1,17 @@
-package ListaEstatica;
+package TiposGenericos;
 
-public class ListaEstatica {
+public class ListaEstatica<T> {
     
-    private int[] info;
+    private Object[] info;
     private int tamanho;
 
     public ListaEstatica(){
-        info = new int[10];
+        info = new Object[10];
         tamanho = 0;
     }
 
     private void redimensionar(){
-        int[] novo = new int[info.length + 10];
+        Object[] novo = new Object[info.length + 10];
         
         for (int i=0; i<tamanho; i++){
             novo[i] = info[i];
@@ -20,7 +20,7 @@ public class ListaEstatica {
         info = novo;
     }
 
-    public void inserir(int valor){
+    public void inserir(T valor){
         if (tamanho == info.length){
             redimensionar();
         }
@@ -35,10 +35,10 @@ public class ListaEstatica {
         }
     }
 
-    public int buscar(int valor){
+    public int buscar(T valor){
         
         for (int i=0; i<tamanho; i++){
-            if (info[i] == valor){
+            if (info[i].equals(valor)){
                 return i;
             }
         }
@@ -46,7 +46,7 @@ public class ListaEstatica {
         return -1;
     }
 
-    public void retirar(int valor){
+    public void retirar(T valor){
         int index = buscar(valor);
 
         if (index > -1){
@@ -59,14 +59,14 @@ public class ListaEstatica {
     }
 
     public void liberar(){
-        info = new int[10];
+        info = new Object[10];
         tamanho = 0;
     }
 
-    public int obterElemento(int posicao){
+    public T obterElemento(int posicao){
         
         if (posicao >= 0 && posicao < tamanho){
-            return info[posicao];
+            return (T) info[posicao];
         }
 
         throw new IndexOutOfBoundsException();
@@ -97,4 +97,20 @@ public class ListaEstatica {
 
         return resultado;
     }
+
+    public void inverter() {
+
+        int esquerda = 0, direita = tamanho -1;
+        
+        while (esquerda < direita) {
+            Object temp = info[esquerda];
+            info[esquerda] = info[direita];
+            info[direita] = temp;
+
+            esquerda++;
+            direita--;
+        }
+
+    }
 }
+
